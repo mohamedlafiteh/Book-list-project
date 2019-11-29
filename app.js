@@ -51,6 +51,9 @@ class UI {
     const container = document.querySelector(".container");
     const form = document.querySelector("#book-form");
     container.insertBefore(div, form);
+
+    //finish alert after three seconds
+    setTimeout(() => document.querySelector(".alert").remove(), 1000);
   }
   static clearfields() {
     document.querySelector("#title").value = "";
@@ -76,10 +79,14 @@ document.querySelector("#book-form").addEventListener("submit", e => {
   } else {
     const newBook = new book(title, author, isbn);
     UI.addBookToList(newBook);
+
+    UI.showAlert("Book added", "success");
+
     UI.clearfields();
   }
 });
 //Event: remove book
 document.querySelector("#book-list").addEventListener("click", e => {
   UI.deleteBook(e.target);
+  UI.showAlert("Book removed", "success");
 });
